@@ -8,9 +8,8 @@ function App() {
 
   // Effects
   React.useEffect(() => {
-    allNewDice()
-  }, [])
-
+    setIsFinished(checkForFinish)
+  }, [dice])
 
   // Functions
   function allNewDice() {
@@ -27,19 +26,10 @@ function App() {
 
   function rollDice() {
     const newDice =  dice.map(item => {
-        let frozenDice
-        if (item.isFrozen) {
-          frozenDice = item
-        } else {
-          frozenDice = {
-            ...item,
-            value: Math.ceil(Math.random() * 6)
-          }
-        }
+      return item.isFrozen ? item : makeNewDie(item)
+    })
 
-        return frozenDice
-      })
-      return newDice
+    return newDice
     }
 
   function freezeDice(diceId) {
@@ -62,6 +52,15 @@ function App() {
       }
     }
     return finish
+  }
+
+  function makeNewDie(die) {
+    return(
+      {
+        ...die,
+        value: Math.ceil(Math.random() * 6)
+      }
+    )
   }
 
   function handleClick() {
@@ -100,7 +99,7 @@ function App() {
         <button
           className="roll-btn"
           onClick={handleClick}
-        >{isFinished ? 'Play Again' : 'Roll'}</button>
+        >{isFinished ? 'Play Again?' : 'Roll'}</button>
 
       </section>
     </div>
