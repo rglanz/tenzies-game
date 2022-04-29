@@ -5,10 +5,24 @@ function App() {
   // State
   const [dice, setDice] = React.useState(allNewDice())
   const [isFinished, setIsFinished] = React.useState(false)
+  const [isError, setIsError] = React.useState(false)
 
   // Effects
   React.useEffect(() => {
-    setIsFinished(checkForFinish)
+    const frozenCheck = dice.every(die => die.isFrozen)
+
+    const diceValues = dice.map(die => die.value)
+    const valueCheck = diceValues.every(die => die === diceValues[0])
+
+    if (frozenCheck && valueCheck) {
+      setIsFinished(true)
+    } else if (frozenCheck && !valueCheck) {
+      setIsError(true)
+    } else if (!frozenCheck) {
+      setIsFinished(false)
+      setIsError(false)
+    }
+
   }, [dice])
 
   // Functions
@@ -44,16 +58,6 @@ function App() {
     }))
   }
 
-  function checkForFinish() {
-    let finish = true
-    for (let i = 0; i < 10; i++) {
-      if (!dice[i].isFrozen) {
-        finish = false
-      }
-    }
-    return finish
-  }
-
   function makeNewDie(die) {
     return(
       {
@@ -64,7 +68,6 @@ function App() {
   }
 
   function handleClick() {
-    setIsFinished(checkForFinish)
     if (isFinished) {
       setDice(allNewDice())
       setIsFinished(false)
@@ -99,7 +102,8 @@ function App() {
         <button
           className="roll-btn"
           onClick={handleClick}
-        >{isFinished ? 'Play Again?' : 'Roll'}</button>
+        >{isError ? 'Try Again' :
+        isFinished? 'Play Again?' : 'Roll'}</button>
 
       </section>
     </div>
