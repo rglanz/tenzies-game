@@ -104,8 +104,18 @@ body {
   box-shadow: var(--bs-small);
 }
 
-.die.frozen {
+.die-frozen {
+  width: 60px;
+  height: 60px;
+  padding-top: 2px;
 
+  font-size: 1.5rem;
+  font-weight: var(--fw-bold);
+
+  background: var(--clr-highlight);
+  border-radius: var(--br-small);
+  border-style: none;
+  box-shadow: var(--bs-small);
 }
 
 .roll-btn {
