@@ -9,9 +9,8 @@ function App() {
 
   // Effects
   React.useEffect(() => {
-    const frozenCheck = dice.every(die => die.isFrozen)
-
     const diceValues = dice.map(die => die.value)
+    const frozenCheck = dice.every(die => die.isFrozen)
     const valueCheck = diceValues.every(die => die === diceValues[0])
 
     if (frozenCheck && valueCheck) {
@@ -22,7 +21,6 @@ function App() {
       setIsFinished(false)
       setIsError(false)
     }
-
   }, [dice])
 
   // Functions
@@ -89,8 +87,8 @@ function App() {
 
   // Initialize Components
   return (
-    <div className="App">
-      <section className="main-container">
+    <div>
+      <div className="main-container">
         <h1 className="title">Tenzies</h1>
         <p className="description">Roll until all dice are the same. Click each die to freeze it at its current value between rolls.</p>
 
@@ -105,7 +103,7 @@ function App() {
         >{isError ? 'Try Again' :
         isFinished? 'Play Again?' : 'Roll'}</button>
 
-      </section>
+      </div>
     </div>
   )
 }
