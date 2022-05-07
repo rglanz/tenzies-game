@@ -87,23 +87,21 @@ function App() {
 
   // Initialize Components
   return (
-    <div>
-      <div className="main-container">
-        <h1 className="title">Tenzies</h1>
-        <p className="description">Roll until all dice are the same. Click each die to freeze it at its current value between rolls.</p>
+    <div className="main-container">
+      <h1 className="title">Tenzies</h1>
+      <p className="description">Roll until all dice are the same. Click each die to freeze it at its current value between rolls.</p>
 
-        <div className="dice-container">
-          {diceArray}
-        </div>
-        
+      <section className="dice-container">
+        {diceArray}
+      </section>
+      
 
-        <button
-          className="roll-btn"
-          onClick={handleClick}
-        >{isError ? 'Try Again' :
-        isFinished? 'Play Again?' : 'Roll'}</button>
+      <button
+        className="roll-btn"
+        onClick={handleClick}
+      >{isError ? 'Try Again' :
+      isFinished? 'Play Again?' : 'Roll'}</button>
 
-      </div>
     </div>
   )
 }
